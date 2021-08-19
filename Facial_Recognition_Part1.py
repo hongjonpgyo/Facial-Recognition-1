@@ -3,6 +3,8 @@ import numpy as np
 
 face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
+insa_no = input("인사번호를 입력하세요")
+
 
 def face_extractor(img):
 
@@ -19,6 +21,9 @@ def face_extractor(img):
 
 
 cap = cv2.VideoCapture(0)
+if cap.isOpened():
+    print('Cap is ready')
+
 count = 0
 
 while True:
@@ -28,7 +33,7 @@ while True:
         face = cv2.resize(face_extractor(frame),(200,200))
         face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
 
-        file_name_path = 'faces/user'+str(count)+'.jpg'
+        file_name_path = 'faces/'+insa_no+'_'+str(count)+'.jpg'
         cv2.imwrite(file_name_path,face)
 
         cv2.putText(face,str(count),(50,50),cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
